@@ -4,7 +4,9 @@
 Combine a few call to a single result which it's returned by first call.
 
 Consider you have a few requests to reads a same file that is very huge let's say it about 1GB and assume it's a fixed file; in that case, u don't want to read the file in each request, so let's combine those requests to read the file just once.
-
+```shell
+npm install --save combine-result
+```
 ```javascript
 const readFile = path => {
   return new Promise(resolve => {
