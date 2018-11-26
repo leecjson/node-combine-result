@@ -13,11 +13,10 @@ module.exports = function() {
       });
     }
     _tasks.set(key, ctx = Object.create(null));
-    const fn = val => {
-      return _tasks.delete(key), val;
-    }
     const p = typeof task == 'function' ? task() : task;
     return p.then(val => {
+      return _tasks.delete(key), val
+    }).then(val => {
       if (ctx.subseq)
         ctx.subseq.forEach(e => e[0](val));
       return val;
@@ -25,6 +24,6 @@ module.exports = function() {
       if (ctx.subseq)
         ctx.subseq.forEach(e => e[1](err));
       return err;
-    }).then(fn, fn);
+    });
   }
 }
